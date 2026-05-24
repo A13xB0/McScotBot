@@ -1,0 +1,67 @@
+remoteterm_url: https://10.7.44.19:8000
+
+weather_channel: "#weather"
+traffic_channel: "#traffic"
+
+daily_time: "07:00"
+frost_evening_time: "17:00"
+poll_interval_minutes: 15
+
+# Maximum messages sent across ALL bots per minute.
+# Each send is spaced evenly: interval = 60s / max_messages_per_minute.
+# With 4/min each send is 15s apart; a 15-message morning run takes ~3.75 min.
+# Recommended: 4 (conservative) to 6 (busier mesh). Do not exceed 10.
+max_messages_per_minute: 4
+
+# Frost warning threshold in Celsius.
+# A frost warning fires when the min temperature is at or below this value.
+frost_threshold_c: 2
+
+# Stormglass API key — used for WeatherBot, TideBot, and FrostBot.
+# Register free at https://stormglass.io (10 requests/day free tier).
+# With 3 regions: 3 weather + 3 tide = 6 requests/day — comfortably within the limit.
+# SunBot uses pure maths and needs no key.
+# Leave as-is or empty to run with SunBot + TrafficBot only.
+stormglass_api_key: "YOUR_STORMGLASS_API_KEY"
+
+regions:
+  - scope: fif
+    label: Fife
+    lat: 56.017        # Rosyth — used for sun calculation + Stormglass tide
+    lon: -3.449
+    weather_location: Glenrothes  # wttr.in location name
+    tide_station: Rosyth          # display name on tide messages
+    traffic_roads:
+      - M90
+      - A92
+      - Forth Road Bridge
+      - Queensferry Crossing
+      - Kincardine Bridge
+      - A985
+
+  - scope: edi
+    label: Edinburgh
+    lat: 55.994        # Leith — used for sun calculation + Stormglass tide
+    lon: -3.176
+    weather_location: Edinburgh
+    tide_station: Leith
+    traffic_roads:
+      - A720
+      - A90
+      - A1
+      - M8
+      - M9
+      - A8
+      - A71
+
+  - scope: tay
+    label: Dundee
+    lat: 56.458        # Dundee — used for sun calculation + Stormglass tide
+    lon: -2.970
+    weather_location: Dundee
+    tide_station: Dundee
+    traffic_roads:
+      - A90
+      - A85
+      - A92
+      - Tay Road Bridge
