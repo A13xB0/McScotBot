@@ -1,5 +1,7 @@
 # meshcore-bots
 
+> **Warning:** This project was most definitely vibe coded. Expect rough edges, questionable abstractions, and decisions made at 2am because they felt right at the time. Use at your own risk — and please open issues rather than assuming anything was deliberate.
+
 A Go binary that sends scheduled weather, tide, sun, frost, and traffic updates to a [RemoteTerm](https://github.com/fdlamotte/Remote-Terminal-for-MeshCore) instance over your MeshCore mesh radio network.
 
 ## Bots
