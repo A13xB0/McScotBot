@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-INSTALL_DIR="${INSTALL_DIR:-$HOME/meshcore-bots}"
+# Repo root = parent of scripts/ (clone dir name does not matter; works with sudo)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INSTALL_DIR="${INSTALL_DIR:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
 SERVICE_NAME="meshcore-bots"
 UNIT_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 BINARY="${INSTALL_DIR}/meshcore-bots"
 CONFIG="${INSTALL_DIR}/config.yaml"
+
+if [[ -n "${SUDO_USER:-}" ]]; then
+  SERVICE_USER="$SUDO_USER"
+else
+  SERVICE_USER="$(id -un)"
+fi
 
 if [[ ! -f "$BINARY" ]]; then
   echo "ERROR: binary not found at $BINARY"
@@ -28,7 +36,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=$(id -un)
+User=${SERVICE_USER}
 WorkingDirectory=${INSTALL_DIR}
 ExecStart=${BINARY} --config ${CONFIG}
 Restart=always

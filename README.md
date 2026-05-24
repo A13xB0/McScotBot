@@ -82,11 +82,12 @@ Cross-compile on your Mac and copy to the server:
 # Build for Linux
 GOOS=linux GOARCH=amd64 go build -o meshcore-bots ./cmd/bots
 
-# Copy files
-scp meshcore-bots config.yaml scripts/install-service.sh alex@10.7.44.19:~/meshcore-bots/
+# Copy files (adjust remote path to your clone directory)
+scp meshcore-bots config.yaml scripts/install-service.sh alex@10.7.44.19:~/McScotBot/
 
-# On the server — install and start as a systemd service
-bash ~/meshcore-bots/install-service.sh
+# On the server — from the repo root (script finds the binary by location, not $HOME)
+cd ~/McScotBot
+./scripts/install-service.sh
 ```
 
 ### Following logs
